@@ -21,9 +21,14 @@ collatzloop_trial <- function(n) { ## Prints out the collatz sequence for a give
   }
   return(stated_problem)
 }
-collatzloop_trial(n=3)
+collatzloop_trial(n=50)
 
-
+collatzloop <- c()
+for (i in 1:10000) {
+  collatzloop <- c(collatzloop, length(collatzloop_trial(i)))
+}
+hist(collatzloop)
+summary(collatzloop)
 
 ###########################################
 ## Combination of the above functions, adding in vectors
@@ -48,8 +53,11 @@ CollatzLoop1 <- function(x,n){ ##This i think loops over 1-10000, i get the leng
   }
   length(collatz_vector)
 }
-CollatzLoop1(n=3)
+CollatzLoop1(n=6)
 
+for(i in 1:100) {
+  hist(CollatzLoop1(n=i))
+}
 
 
 ###################################################
@@ -65,4 +73,7 @@ collatzlength <- function(n) { ## Also gives sequence length
 }
 collatzlength(n=3)
 
-
+col_len <- c()
+for(i in 1:10000) {
+  col_len<- c(col_len, length(collatzlength(i)))
+}
