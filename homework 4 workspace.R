@@ -21,7 +21,8 @@ collatzloop_trial <- function(n) { ## Prints out the collatz sequence for a give
   }
   return(stated_problem)
 }
-collatzloop_trial(n=50)
+collatzloop_trial(7)
+
 
 collatzloop <- c()
 for (i in 1:10000) {
@@ -30,50 +31,14 @@ for (i in 1:10000) {
 hist(collatzloop)
 summary(collatzloop)
 
-###########################################
-## Combination of the above functions, adding in vectors
-
-CollatzLoop1 <- function(x,n){ ##This i think loops over 1-10000, i get the lengths 
-  for(x in 1:n){
-    collatz_vector <- c()
-    for(i in 1:10000){
-      if (x == 1){
-        collatz_vector <- c(collatz_vector, x)
-        break
-      } else {
-        if (x %% 2 == 0){
-          collatz_vector <- c(collatz_vector, x)
-          x <- x/2
-        } else {
-          collatz_vector <- c(collatz_vector, x)
-          x <- 3*x+1
-        }
-      }
-    }
-  }
-  length(collatz_vector)
-}
-CollatzLoop1(n=6)
-
-for(i in 1:100) {
-  hist(CollatzLoop1(n=i))
-}
-
-
 ###################################################
-## Trial
 
-collatzlength <- function(n) { ## Also gives sequence length 
-  collatz_length2 <- c()
-  for(i in 1:10000) {
-    collatz_length2 <- c(collatz_length2,
-                         CollatzLoop1(n=n))
-  }
-  mean(collatz_length2)
+collatzloop_bonus2 <- c()
+for (i in 1:100) {
+  collatzloop_bonus2 <- c(collatzloop_bonus2, (collatzloop_trial(i)))
 }
-collatzlength(n=3)
+barplot(collatzloop_bonus2)
 
-col_len <- c()
-for(i in 1:10000) {
-  col_len<- c(col_len, length(collatzlength(i)))
-}
+integers <- c(integers, collatzloop)
+
+

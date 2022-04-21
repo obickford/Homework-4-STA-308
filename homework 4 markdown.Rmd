@@ -1,0 +1,61 @@
+---
+title: "Homework 4"
+author: "Olivia Bickford"
+date: "4/20/2022"
+output: html_document
+---
+
+
+## Directions for Setting Up Collatz Sequence
+
+```{r directions }
+directions <- function(num) { ##basic collatz sequence, outputs next number in the sequence
+  if(num == 1) { ## and sets up the basic function for the collatz sequence
+    return(NULL)
+  } 
+  
+  if(num %% 2 == 0) {
+    return(num/2)
+  } 
+  else{
+    return(3*num+1)
+  }
+}
+```
+
+
+## Collatz Loop Squences for a given value n
+
+```{r collatz sequence}
+collatzloop_sequences <- function(n) { ## Prints out the collatz sequence for a given n value 
+  stated_problem <- n
+  while (n != 1) {
+    n <- directions(n=n)
+    stated_problem <- c(stated_problem, n)
+  }
+  return(stated_problem)
+}
+collatzloop_sequences(6)
+```
+
+
+## Histogram for Collatz Sequence lengths 1-10000
+
+```{r histogram for collatz lengths}
+collatzloop <- c()
+for (i in 1:10000) {
+  collatzloop <- c(collatzloop, length(collatzloop_sequences(i)))
+}
+hist(collatzloop)
+```
+
+
+## Summary Statistics 
+
+```{r }
+summary(collatzloop)
+```
+
+
+
+
