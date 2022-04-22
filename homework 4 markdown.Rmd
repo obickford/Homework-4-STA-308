@@ -5,6 +5,14 @@ date: "4/20/2022"
 output: html_document
 ---
 
+```{r needed packages}
+if (!require("tidyverse")) install.packages("tidyverse")
+library(tidyverse)
+if (!require("ggplot2")) install.packages("ggplot2")
+library(ggplot2)
+```
+
+These are the packages needed for the following code.
 
 ## Directions for Setting Up Collatz Sequence
 
@@ -35,7 +43,7 @@ collatzloop_sequences <- function(n) { ## Prints out the collatz sequence for a 
   }
   return(stated_problem)
 }
-collatzloop_sequences(6)
+collatzloop_sequences(6)  ## put in 6 for an example 
 ```
 
 
@@ -49,13 +57,73 @@ for (i in 1:10000) {
 hist(collatzloop)
 ```
 
+The histogram for 10,000 sample lengths and the frequency is above. This histogram is right skewed and bimodal. This means that most of the sample lengths are in the lower numbers such as 60,70,80 as compared to higher numbers such as 250. From the summary statistics below you can see that the mean sample length is 85.97. The highest length is 262 and the lowest is 1 which is expected.You have more sample lengths that are in the lower numbers which pulls the distribution and skews it to the right. 
+
 
 ## Summary Statistics 
 
-```{r }
+```{r summary}
 summary(collatzloop)
 ```
 
 
+## Bonus Question
+
+```{r bonus}
+collatzloop_2_bonus <- c() ## Save it in a vector
+for (i in 1:10000) {
+  collatzloop_2_bonus <- c(collatzloop_2_bonus, (collatzloop_sequences(i)))
+}
+collatzloop_bonus <- tabulate(collatzloop_2_bonus, nbins = 100) ##tables this and puts into bins to count the sequence only integers 1-100 and show how many times that number occurs in the collatz sequence from a sample of 1-10000
+collatzloop_bonus 
+```
+
+1 appears 10,000 times since it is the end of every sequence.
+
+## BarGraph
+
+```{r bargraph bonus}
+integers <- (1:100)
+frequency_of_integers <- collatzloop_bonus
+
+collatzloop_bonus_df <- as.data.frame(collatzloop_bonus) ##made this a data frame for integers 1-100 and put collatzloop_bonus into a data frame 
+
+ggplot(data = collatzloop_bonus_df, aes(x= integers, y = frequency_of_integers )) + 
+  geom_col(fill= "lightblue", colour="black") ##build bar plot with the two variables above
+```
 
 
+## The Number between 1 and 100 that appears the least amount of times
+
+```{r bonus least amount}
+minimum_bonus <- which(collatzloop_bonus == min(collatzloop_bonus)) ## find minimum frequencies of the data frame and the specific integers that go along with the frequencies
+minimum_bonus
+```
+
+These numbers 
+
+## The odd number (not counting one) that appears the most amount of times
+
+```{r bonus odd num}
+df_odd_integers <- data.frame(integers = 1:100, y =frequency_of_integers) ## put in data frame for odd numbers but put label of integers that correlate with the frequencies 
+
+row_odd <- seq_len(nrow(df_odd_integers)) %% 2  ## select odd numbers        
+
+odd_nums_df <- df_odd_integers[row_odd == 1, ]
+
+arrange(odd_nums_df, desc(y)) %>%  ##arrange frequency of integers from highest to lowest
+  slice(2) ##slice the second value
+```
+
+After 1, 5 appears the most amount of times. It appears 9400 times.
+
+https://r-graphics.org/recipe-bar-graph-basic-bar
+  Used this link to help guide in making the bar plot    
+      -Learned about geom_col for colors and outlining
+      -Attempted to add x and y variables to have labels for the axis'
+      and have numeric labels to show frequency range and integers
+      
+https://stackoverflow.com/questions/9390749/return-index-of-the-smallest-value-in-a-vector
+  Used this to help with finding minimum value in vector 
+  
+  
