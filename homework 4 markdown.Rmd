@@ -4,6 +4,26 @@ author: "Olivia Bickford"
 date: "4/20/2022"
 output: html_document
 ---
+April 21, 2022
+Olivia Bickford 
+
+This is homework 4
+Working with the Collatz Sequence
+Using more practice with conditional code 
+  to loop together functions and create sequences and user specified code 
+
+I also created plots and bar graphs and learned 
+  more about how those functions worked and how I can create different graphs
+
+In the first question I made a functions outlining 
+  the specifics for collatz sequence such as is a number 
+  is divided by 2 and equals 0 it returns that number, or 
+  if not the number goes through 3*num +1 
+
+Then using conditional code, I made a function that printed out the 
+  full sequence for an n value used from 1-10000
+  
+Attempt at the bonus and sources referrenced are at the end!
 
 ```{r needed packages}
 if (!require("tidyverse")) install.packages("tidyverse")
@@ -100,7 +120,7 @@ minimum_bonus <- which(collatzloop_bonus == min(collatzloop_bonus)) ## find mini
 minimum_bonus
 ```
 
-These numbers 
+These numbers all have the same frequency and they all appear the least amount of times.
 
 ## The odd number (not counting one) that appears the most amount of times
 
